@@ -1,1 +1,65 @@
+Complexity: O(n) in the worst case because you need to traverse
+the entire list to find the last node.
+
+public void add(int element) {
+    ListNode newNode = new ListNode(element);
+    if (head == null) {
+        head = newNode;
+    } else {
+        ListNode current = head;
+        while (current.next != null) {
+            current = current.next;
+        }
+        current.next = newNode;
+    }
+}
+----------------------------------------------------------------------
+Complexity: O(n) in the worst case because you may need
+to traverse the entire list to find the node to remove.
+
+public void remove(int element) {
+    if (head == null) {
+        return; // List is empty
+    }
+    if (head.data == element) {
+        head = head.next;
+        return;
+    }
+    ListNode current = head;
+    while (current.next != null) {
+        if (current.next.data == element) {
+            current.next = current.next.next;
+            return;
+        }
+        current = current.next;
+    }
+}
+------------------------------------------------------
+Complexity: O(n) in the worst case because you may
+need to traverse the entire list to find the element.
+
+public boolean search(int element) {
+    ListNode current = head;
+    while (current != null) {
+        if (current.data == element) {
+            return true; // Element found
+        }
+        current = current.next;
+    }
+    return false; // Element not found
+}
+----------------------------------------------------
+Complexity: O(n) in the worst case because you 
+may need to traverse the entire list to find the node to modify.
+
+public void modify(int oldElement, int newElement) {
+    ListNode current = head;
+    while (current != null) {
+        if (current.data == oldElement) {
+            current.data = newElement; // Modify the element
+            return;
+        }
+        current = current.next;
+    }
+}
 
