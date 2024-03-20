@@ -1,0 +1,72 @@
+Complexity:
+Amortized O(1) for adding an element at the end of the array (if resizing is infrequent).
+O(n) for adding an element at the end of the array when resizing is required.
+
+public void add(int element) {
+    // Check if the array is full
+    if (size == capacity) {
+        resizeArray();
+    }
+    
+    // Add the element at the end of the array
+    array[size++] = element;
+}
+
+private void resizeArray() {
+    // Create a new larger array
+    int newCapacity = capacity * 2;
+    int[] newArray = new int[newCapacity];
+    
+    // Copy elements from the original array to the new array
+    for (int i = 0; i < size; i++) {
+        newArray[i] = array[i];
+    }
+    
+    // Update the reference to the new array and capacity
+    array = newArray;
+    capacity = newCapacity;
+}
+----------------------------------------------------------------------------
+Complexity: O(n) for removing an element at
+any position other than the end of the array, as it requires shifting elements.
+
+public void remove(int index) {
+    // Check if the index is valid
+    if (index < 0 || index >= size) {
+        throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+    }
+    
+    // Shift elements to the left to fill the gap
+    for (int i = index; i < size - 1; i++) {
+        array[i] = array[i + 1];
+    }
+    
+    // Decrement the size of the array
+    size--;
+}
+-------------------------------------------------------------
+Complexity: O(n), where n is the number of elements in the array.
+In the worst case, you may need to iterate through all elements to find the target element.
+
+public int search(int element) {
+    for (int i = 0; i < size; i++) {
+        if (array[i] == element) {
+            return i; // Element found at index i
+        }
+    }
+    return -1; // Element not found
+}
+----------------------------------------------------------
+Complexity: O(1), as it involves directly accessing and modifying
+the element at the specified index.
+
+public void modify(int index, int newValue) {
+    // Check if the index is valid
+    if (index < 0 || index >= size) {
+        throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+    }
+
+    // Modify the value at the specified index
+    array[index] = newValue;
+}
+-----------------------------------------------------
