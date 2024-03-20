@@ -1,1 +1,67 @@
+Complexity: O(n) in the worst case because
+you may need to traverse the entire list to find the insertion point.
 
+public void add(int element) {
+    ListNode newNode = new ListNode(element);
+    if (head == null) {
+        head = newNode;
+        tail = newNode;
+    } else {
+        tail.next = newNode;
+        newNode.prev = tail;
+        tail = newNode;
+    }
+}
+-------------------------------------------------
+Complexity: O(n) in the worst case because you may need to
+traverse the entire list to find the node to remove.
+
+public void remove(int element) {
+    ListNode current = head;
+    while (current != null) {
+        if (current.data == element) {
+            if (current == head) {
+                head = head.next;
+                if (head != null) {
+                    head.prev = null;
+                }
+            } else if (current == tail) {
+                tail = tail.prev;
+                tail.next = null;
+            } else {
+                current.prev.next = current.next;
+                current.next.prev = current.prev;
+            }
+            return;
+        }
+        current = current.next;
+    }
+}
+------------------------------------------------------------------
+Complexity: O(n) in the worst case because you may need to
+traverse the entire list to find the element.
+
+public boolean search(int element) {
+    ListNode current = head;
+    while (current != null) {
+        if (current.data == element) {
+            return true; // Element found
+        }
+        current = current.next;
+    }
+    return false; // Element not found
+}
+----------------------------------------------------------------------
+Complexity: O(n) in the worst case because you may need to
+traverse the entire list to find the node to modify.
+
+public void modify(int oldElement, int newElement) {
+    ListNode current = head;
+    while (current != null) {
+        if (current.data == oldElement) {
+            current.data = newElement; // Modify the element
+            return;
+        }
+        current = current.next;
+    }
+}
