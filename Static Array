@@ -1,0 +1,73 @@
+// Complexity: O(n), where n is the number of elements in the array. 
+This is because adding an element at any position other than
+the end of the array requires shifting all subsequent elements
+to the right to make space.
+
+public void add(int index, int element) {
+    // Check if the index is valid
+    if (index < 0 || index > size) {
+        throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+    }
+    
+    // Check if the array is full
+    if (size == capacity) {
+        throw new IllegalStateException("Array is full, cannot add more elements");
+    }
+
+    // Shift elements to the right to make space for the new element
+    for (int i = size - 1; i >= index; i--) {
+        array[i + 1] = array[i];
+    }
+
+    // Insert the new element at the specified index
+    array[index] = element;
+    
+    // Increment the size of the array
+    size++;
+}
+-----------------------------------------
+Complexity: O(n), where n is the number of elements
+in the array. This is because removing an element at
+any position other than the end of the array requires
+shifting all subsequent elements to the left to fill the gap
+
+public void remove(int index) {
+    // Check if the index is valid
+    if (index < 0 || index >= size) {
+        throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+    }
+
+    // Shift elements to the left to fill the gap created by removing the element
+    for (int i = index; i < size - 1; i++) {
+        array[i] = array[i + 1];
+    }
+
+    // Decrement the size of the array
+    size--;
+}
+-------------------------------------------------------
+Complexity: O(n), where n is the number of elements in the array.
+In the worst case, you may need to iterate through
+all elements to find the target element.
+
+public int search(int element) {
+    for (int i = 0; i < size; i++) {
+        if (array[i] == element) {
+            return i; // Element found at index i
+        }
+    }
+    return -1; // Element not found
+}
+----------------------------------------------------------------
+Complexity: O(1), as it involves directly accessing and modifying
+the element at the specified index.
+
+public void modify(int index, int newValue) {
+    // Check if the index is valid
+    if (index < 0 || index >= size) {
+        throw new IndexOutOfBoundsException("Index " + index + " is out of bounds");
+    }
+
+    // Modify the value at the specified index
+    array[index] = newValue;
+}
